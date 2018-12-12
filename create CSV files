@@ -1,0 +1,18 @@
+# use r'C:\...' to avoid the error '(access of file)'
+#use with open()  it close the file without writing close() 'r' = read the content of the file
+
+with open(r'C:\Users\.....\JJ-CH15.txt', 'r') as f1: 
+    sentences = []                                   # creat an empity list to keep the lines 
+    lines = f1.readlines()                           # readlines() 
+    for line in lines:                               # use for loop to to append the lines into 
+        line = line.replace(',',' ')
+        sentence = "CH15,JJ,"+line
+        sentences.append(sentence) 
+    print(sentences[0]) #test the result to see what have imported
+ 
+# creat a new file 'w'= write something to the file
+#use writelines() to input multiple lines from a list into a file
+
+with open(r'C:\.....\JJ-CH15.csv', 'w') as outfile:  
+    outfile.writelines(sentences)   
+        
