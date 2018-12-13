@@ -1,0 +1,54 @@
+
+import base64
+import numpy as np
+import pandas as pd
+import nltk
+from nltk.corpus import stopwords
+import base64
+import numpy as np
+import pandas as pd
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem.snowball import EnglishStemmer
+import string
+import re
+
+# Plotly imports for visualize the results
+from matplotlib import pyplot as plt
+import seaborn as sns
+%matplotlib inline
+import plotly.offline as py
+import plotly.graph_objs as go
+import plotly.tools as tls
+
+
+
+
+df = pd.read_csv(r"C:\....whole_data600.csv")  
+df.shape
+
+
+#visualize the data distribution of three authors 
+
+z = {'JJ': 'James Joyece', 'RY': 'Richard Yates', 'RC': 'Remond Carvert'}
+
+# use the plotly.graph_objs input the pramaters
+
+data = [go.Bar(
+            x = df.author.map(z).unique(),
+            y = df.author.value_counts().values,
+            marker= dict(colorscale='Jet',
+                         color = df.author.value_counts().values
+                        ),
+            text='Text entries attributed to Author'
+    )]
+
+layout = go.Layout(
+    title='Target variable distribution'
+)
+
+fig = go.Figure(data=data, layout=layout)
+
+py.iplot(fig, filename='basic-bar')
+
+
