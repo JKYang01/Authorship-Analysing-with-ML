@@ -100,4 +100,3 @@ print(df_word_JJ.head())
 #creat new file
 with open (r"C:\Users\wangtao\Desktop\word_data_RC.csv",'w')as f: 
     df_word_JJ.to_csv(f)
- 
