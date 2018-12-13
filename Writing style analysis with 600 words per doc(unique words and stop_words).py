@@ -100,14 +100,20 @@ plt.show()
 
 
 ## for multipule fiugres use f, axes  
-f, axes = plt.subplots(2,1,figsize=(21, 18), sharex=True, sharey = False)  #ploty visualization
-sns.despine(left=True)
-sns.set_context("poster")
-### figure of unique words
-####truncation for better visuals set range 
+f, axes = plt.subplots(2,1,figsize=(21, 18), sharex=True, sharey = False)  
+###matplotlib.pyplot.subplots(nrows=1, ncols=1, sharex=False, sharey=False, squeeze=True, 
+###                           subplot_kw=None, gridspec_kw=None, **fig_kw)[source]
+###sharex, sharey : bool or {'none', 'all', 'row', 'col'}, default: False
+###Controls sharing of properties among x (sharex) or y (sharey) 
+###axes: True or 'all': x- or y-axis will be shared among all subplots.
+###https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplots.html
+
+
+## figure of unique words
+###truncation for better visuals set if x>600 regard as = 600
 df['num_unique_words'].loc[df['num_unique_words'] >600] = 600 
 sns.violinplot(x='author', y='num_unique_words', data=df, ax = axes[0])
-### figure of stop words
+## figure of stop words
 df['num_stopwords'].loc[df['num_stopwords'] >600] = 600                    
 sns.violinplot(x='author', y='num_stopwords', data=df, ax  = axes[1])
 sns.despine(left=True)
