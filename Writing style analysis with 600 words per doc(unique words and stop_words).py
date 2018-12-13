@@ -1,8 +1,5 @@
-# IST-Text-Mining-Porject
-Authorship identification with simple feature engineering and LinearSVC to find writing style on word-level and extract the feature words by employing the algorithm
 
-## import the packages 
-
+# import the packages 
 ## encoding and dataframe 
 import base64  
 import numpy as np 
@@ -29,21 +26,21 @@ import plotly.graph_objs as go
 import plotly.tools as tls
 %matplotlib inline
 
-#%matplotlib inline is used in ipython to show the visualization plt.show() works too but it has to be added after each figure. 
-#%matplotlib inline has the advantage that when it is called once, all figures in the notebook will be inline. 
+##%matplotlib inline is used in ipython to show the visualization plt.show() works too but it has to be added after each figure. 
+##%matplotlib inline has the advantage that when it is called once, all figures in the notebook will be inline. 
 
 
-## import datafile
+#import datafile
 
 df = pd.read_csv(r"C:\....whole_data600.csv")  
 df.shape
 
 
-## use the plotly.graph_objs visualize the data distribution of three authors 
+# use the plotly.graph_objs visualize the data distribution of three authors 
 
 z = {'JJ': 'James Joyece', 'RY': 'Richard Yates', 'RC': 'Remond Carvert'}
 
-###input the pramaters
+##input the pramaters
 
 data = [go.Bar(
             x = df.author.map(z).unique(),
@@ -58,14 +55,14 @@ layout = go.Layout(
     title='Target variable distribution'
 )
 
-### make the figture 
+## make the figture 
 fig = go.Figure(data=data, layout=layout)  
 
 py.iplot(fig, filename='basic-bar')
 
 # use regular expression and funtion to do simple feature engineering to get some feature directly #
 
-### get stopword list from nltk corpus
+## get stopword list from nltk corpus
 eng_stopwords = set(stopwords.words("english")) 
 stemmer = EnglishStemmer()
 pd.options.mode.chained_assignment = None
@@ -79,37 +76,36 @@ df['split'] = df['text'].apply(nltk.word_tokenize)
 df['words'] = df['split'].apply(lambda x : [word.lower() for word in x if word.isalpha()])
 df['stemmed'] = df['words'].apply(lambda x: [stemmer.stem(y) for y in x 
                                                          if re.sub('[^a-z]+','',y.lower()) not in eng_stopwords])
-## Number of unique words in the text ##
+# count the number of unique words and stop words in the text #
 
 df["num_unique_words"] = df['stemmed'].apply(lambda x: len(x))
-
-## Number of stopwords in the text ##
 df["num_stopwords"] = df['text'].apply(lambda x: len([w for w in str(x).lower().split() if w in eng_stopwords]))
 
-## visualize results##
+# visualize results#
 plt.figure(figsize=(12,8))
 
-## single figure we can use 
-###truncation for better visuals set the range if the number of words is more than 600 it will be regard as 600
-### .loc[]Access a group of rows and columns by label(s) or a boolean array.
-###.loc[] is primarily label based, but may also be used with a boolean array. 
-###https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.loc.html
-
-train_df['num_unique_words'].loc[train_df['num_unique_words']>600] = 600 
+## for single figure  
+df['num_unique_words'].loc[df['num_unique_words']>600] = 600 
 ###  use seaborn .violinplot() fuction to visualize the distribution of unique words number in each document
 sns.violinplot(x='author', y='num_words', data=train_df)  
-### here we set the pramater in plotly
+###  set the pramater in plotly
 plt.xlabel('Author Name', fontsize=12)
 plt.ylabel('Number of words in text', fontsize=12)
 plt.title("Number of words by author", fontsize=15)
 plt.show()
+###truncation for better visuals, set the range if the number of words is more than 600 it will be regard as 600
+### .loc[]Access a group of rows and columns by label(s) or a boolean array.
+###.loc[] is primarily label based, but may also be used with a boolean array. 
+###https://pandas.pydata.org/pandas-docs/stable/generated/pandas.Series.loc.html
 
-### for multipule fiugres use f, axes  
+
+## for multipule fiugres use f, axes  
 f, axes = plt.subplots(2,1,figsize=(21, 18), sharex=True, sharey = False)  #ploty visualization
 sns.despine(left=True)
 sns.set_context("poster")
 ### figure of unique words
-df['num_unique_words'].loc[df['num_unique_words'] >600] = 600              #truncation for better visuals
+####truncation for better visuals set range 
+df['num_unique_words'].loc[df['num_unique_words'] >600] = 600 
 sns.violinplot(x='author', y='num_unique_words', data=df, ax = axes[0])
 ### figure of stop words
 df['num_stopwords'].loc[df['num_stopwords'] >600] = 600                    
