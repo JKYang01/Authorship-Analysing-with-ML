@@ -92,6 +92,7 @@ Count → count word overall  and  by author  → 50 highest frequency
 ### Using Plotly  to visualize
 Fuction of dash lines:
 df['ALL'] * word_count[authors[0]].sum() / word_count['ALL'].sum()
+
 df['ALL'] * word_count[authors[:2]].values.sum() / word_count['ALL'].sum() 
 ![alt text](https://github.com/JKYang01/IST-Text-Mining-Porject/blob/master/IST736%20project/%E5%9B%BE%E7%89%875.png)
 
