@@ -23,7 +23,7 @@ The distribution of author in the data is:
 
 ## The code of writing files 
 firtly split the whole text into words with .split() 
-then use .iter() and zip() to sperate the long list of words into sublists which contains 600 words 
+then use .iter() and zip() to sperate the long list of words into sublists and each  contains 600 words  
 ```ruby
 def list_of_words(init_list,sub_list_len):
     list_of_word = list(zip(*(iter(init_list),)*sub_list_len)) 
@@ -93,3 +93,6 @@ Fuction of dash lines:
 df['ALL'] * word_count[authors[0]].sum() / word_count['ALL'].sum()
 df['ALL'] * word_count[authors[:2]].values.sum() / word_count['ALL'].sum() 
 ![alt text](https://github.com/JKYang01/IST-Text-Mining-Porject/blob/master/IST736%20project/%E5%9B%BE%E7%89%875.png)
+
+
+
