@@ -1,6 +1,6 @@
 import pandas as pd 
 
-df_JJ = pd.read_csv(r"C:\Users\wangtao\Desktop\data_RC.csv")
+df_JJ = pd.read_csv(r"C:\Users\wangtao\Desktop\data_JJ.csv")
 print(df_JJ.head())
 
 text_JJ = df_JJ['text']
@@ -42,7 +42,7 @@ data = {'author':'RC','text': string_data}
 df_graph_JJ = pd.DataFrame(data)
 print(df_graph_JJ.head())
 
-with open (r"C:\Users\wangtao\Desktop\graph_data_RC.csv",'w')as f:
+with open (r"C:\Users\wangtao\Desktop\graph_data_JJ.csv",'w')as f:
     df_graph_JJ.to_csv(f)
   
 #*args and *kwargs are mostly used in function definitions. 
@@ -74,10 +74,10 @@ for line in text_JJ:
         unit_JJ.append(w)
 print(unit_JJ[0:2]) 
 #len(unit_JJ)
-['My', 'husband']
+
 
 def list_of_words(init_list,sub_list_len):
-    list_of_word = list(zip(*(iter(init_list),)*sub_list_len))    # python3 need to use list() to list the content list(zip()) 
+    list_of_word = list(zip(*(iter(init_list),)*sub_list_len))   # python3 need to use list() to list the content list(zip()) 
     end_list = [list(i) for i in list_of_word]
     n = len(init_list)% sub_list_len
     end_list.append(init_list[-n:]) if n!=0 else end_list
@@ -86,17 +86,21 @@ def list_of_words(init_list,sub_list_len):
 new_word_list = list_of_words(unit_JJ,600)
 print(new_word_list[-1])
 
+#Now they are list in the list we should make the sublist into strings
+# transfer list into string using ''.jion(). 
+# here jion with space " " cause it has been splited into words
+
 string_word_data = []
 for s in new_word_list:
-    string_word = " ".join(s)           # transfer list into string using ''.jion(). 
-                                        # here jion with space " " cause it has been splited into words
+    string_word = " ".join(s)        
     string_word_data.append(string_word)
-print(string_word_data[-1])
+print(string_word_data[-1]) # test the result
 
-word_data = {'author':'RC','text': string_word_data}
+# form the dataframes then Write them into new csv files 
+word_data = {'author':'JJ','text': string_word_data}
 df_word_JJ = pd.DataFrame(word_data)
 print(df_word_JJ.head())
 
 #creat new file
-with open (r"C:\Users\wangtao\Desktop\word_data_RC.csv",'w')as f: 
+with open (r"C:\Users\wangtao\Desktop\word_data_JJ.csv",'w')as f: 
     df_word_JJ.to_csv(f)
