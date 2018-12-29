@@ -1,4 +1,5 @@
 # IST-Text-Mining-Porject
+# GLOOMY AUTHOR IDENTIFICATION
 Authorship identification with simple feature engineering and LinearSVC to find writing style on word-level 
 and extract the feature words by employing the algorithm
 Using the package of Matplotlib --plotly to visualize the results and provide more insights
