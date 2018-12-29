@@ -34,7 +34,7 @@ def list_of_words(init_list,sub_list_len):
 new_word_list = list_of_words(unit_JJ,600)
 ```
 
-## Simple feature engeneering 
+## Simple feature engineering 
 quite a few special characters which might be good features.  Get directly in the text data without complex calculation. 
 ### Text-based features:  frequency of specific words
 By employing NLTK tags to catagrize the words and count them in each group
