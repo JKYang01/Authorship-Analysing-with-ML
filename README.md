@@ -1,4 +1,4 @@
-# IST-Text-Mining-Project
+# Authorship-Analysing
 # GLOOMY AUTHOR IDENTIFICATION
 Authorship identification with simple feature engineering and LinearSVC to find writing style on word-level 
 and extract the feature words by employing the algorithm
